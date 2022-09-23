@@ -1,0 +1,359 @@
+car_type: MJCar
+protocols:
+  '100':
+    id: '100'
+    name: throttlecommand100_100
+    protocol_type: control
+    sender: ACU
+    vars:
+    - bit: 32
+      is_signed_var: false
+      len: 16
+      name: TrottlePedalTarget
+      offset: 0.0
+      order: intel
+      physical_range: '[0|100]'
+      physical_unit: '%'
+      precision: 0.1
+      type: double
+    - bit: 8
+      is_signed_var: false
+      len: 10
+      name: Throttle_Acc
+      offset: 0.0
+      order: intel
+      physical_range: '[0|10.23]'
+      physical_unit: m/s^2
+      precision: 0.01
+      type: double
+    - bit: 0
+      enum:
+        0: THROTTLEENCTRL_DRIVE_EN_CTRL_DISABLE
+        1: THROTTLEENCTRL_DRIVE_EN_CTRL_ENABLE
+      is_signed_var: false
+      len: 1
+      name: ThrottleEnCtrl
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+  '101':
+    id: '101'
+    name: brakecommand101_101
+    protocol_type: control
+    sender: ACU
+    vars:
+    - bit: 24
+      is_signed_var: false
+      len: 16
+      name: BrakePedalTarget
+      offset: 0.0
+      order: intel
+      physical_range: '[0|100]'
+      physical_unit: '%'
+      precision: 0.1
+      type: double
+    - bit: 1
+      enum:
+        0: BRAKEENCTRL_BRAKE_EN_CTRL_DISABLE
+        1: BRAKEENCTRL_BRAKE_EN_CTRL_ENABLE
+      is_signed_var: false
+      len: 1
+      name: BrakeEnCtrl
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 8
+      is_signed_var: false
+      len: 10
+      name: Brake_Dec
+      offset: 0.0
+      order: intel
+      physical_range: '[0|10.23]'
+      physical_unit: m/s^2
+      precision: 0.01
+      type: double
+    - bit: 0
+      enum:
+        0: AEBENCTRL_AEB_EN_CTRL_DISABLE
+        1: AEBENCTRL_AEB_EN_CTRL_ENABLE
+      is_signed_var: false
+      len: 1
+      name: AEBEnCtrl
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+  '102':
+    id: '102'
+    name: steeringcommand102_102
+    protocol_type: control
+    sender: ACU
+    vars:
+    - bit: 16
+      is_signed_var: true
+      len: 16
+      name: HandWheelSteerAngTgt
+      offset: 0.0
+      order: intel
+      physical_range: '[-500|500]'
+      physical_unit: deg
+      precision: 1.0
+      type: int
+    - bit: 8
+      is_signed_var: false
+      len: 8
+      name: HandWheelSteerAngSpd
+      offset: 0.0
+      order: intel
+      physical_range: '[0|255]'
+      physical_unit: deg/s
+      precision: 1.0
+      type: int
+    - bit: 0
+      enum:
+        0: STEERENCTRL_STEERENCTRLDISABLE
+        1: STEERENCTRL_STEERENCTRLENABLE
+      is_signed_var: false
+      len: 1
+      name: SteerEnCtrl
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+  '103':
+    id: '103'
+    name: gearcommand103_103
+    protocol_type: control
+    sender: ACU
+    vars:
+    - bit: 1
+      enum:
+        0: GEARTARGET_GEAR_TARGET_PARK
+        1: GEARTARGET_GEAR_TARGET_DRIVE
+        2: GEARTARGET_GEAR_TARGET_REVERSE
+      is_signed_var: false
+      len: 3
+      name: GearTarget
+      offset: 0.0
+      order: intel
+      physical_range: '[0|3]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 0
+      enum:
+        0: GEARENCTRL_GEAR_EN_CTRL_DISABLE
+        1: GEARENCTRL_GEAR_EN_CTRL_ENABLE
+      is_signed_var: false
+      len: 1
+      name: GearEnCtrl
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+  '500':
+    id: '500'
+    name: throttlereport500_500
+    protocol_type: report
+    sender: VCU
+    vars:
+    - bit: 24
+      is_signed_var: false
+      len: 16
+      name: ThrottlePedalAct
+      offset: 0.0
+      order: intel
+      physical_range: '[0|100]'
+      physical_unit: '%'
+      precision: 0.1
+      type: double
+    - bit: 16
+      enum:
+        0: DRIVECOMFAULT_THROTTLE_COM_NO_FAULT
+        1: DRIVECOMFAULT_THROTTLE_COM_FAULT
+      is_signed_var: false
+      len: 8
+      name: DriveComFault
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 8
+      enum:
+        0: DRIVEHWFAULT_DRIVE_SYSTEM_HW_NO_FAULT
+        1: DRIVEHWFAULT_DRIVE_SYSTEM_HW_FAULT
+      is_signed_var: false
+      len: 8
+      name: DriveHWFault
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 0
+      enum:
+        0: THROTTLEENSTATE_THROTTLE_EN_STATE_MANUAL
+        1: THROTTLEENSTATE_THROTTLE_EN_STATE_AUTO
+        2: THROTTLEENSTATE_THROTTLE_EN_STATE_TAKEOVER
+        3: THROTTLEENSTATE_THROTTLE_EN_STATE_STANDBY
+      is_signed_var: false
+      len: 2
+      name: ThrottleEnState
+      offset: 0.0
+      order: intel
+      physical_range: '[0|3]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+  '501':
+    id: '501'
+    name: brakereport501_501
+    protocol_type: report
+    sender: VCU
+    vars:
+    - bit: 24
+      is_signed_var: false
+      len: 16
+      name: BrakePedalAct
+      offset: 0.0
+      order: intel
+      physical_range: '[0|100]'
+      physical_unit: '%'
+      precision: 0.1
+      type: double
+    - bit: 16
+      enum:
+        0: BRAKEHWFAULT_BRAKE_SYSTEM_HW_NO_FAULT
+        1: BRAKEHWFAULT_BRAKE_SYSTEM_HW_FAULT
+      is_signed_var: false
+      len: 8
+      name: BrakeHWFault
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 8
+      enum:
+        0: BRAKECOMFAULT_BRAKE_COM_NO_FAULT
+        1: BRAKECOMFAULT_BRAKE_COM_FAULT
+      is_signed_var: false
+      len: 8
+      name: BrakeComFault
+      offset: 0.0
+      order: intel
+      physical_range: '[0|1]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 0
+      is_signed_var: false
+      len: 2
+      name: BrakeEnState
+      offset: 0.0
+      order: intel
+      physical_range: '[0|3]'
+      physical_unit: ''
+      precision: 1.0
+      type: int
+  '502':
+    id: '502'
+    name: steeringreport502_502
+    protocol_type: report
+    sender: VCU
+    vars:
+    - bit: 40
+      description: greater than 0 accel less than 0 deaccel
+      is_signed_var: false
+      len: 8
+      name: HandWheelSteerAngSpdAct
+      offset: 0.0
+      order: intel
+      physical_range: '[0|255]'
+      physical_unit: deg/s
+      precision: 1.0
+      type: int
+    - bit: 24
+      description: greater than 0 left less than 0 left
+      is_signed_var: true
+      len: 16
+      name: HandWheelSteerAngAct
+      offset: 0.0
+      order: intel
+      physical_range: '[-512|511]'
+      physical_unit: deg
+      precision: 1.0
+      type: int
+    - bit: 16
+      enum:
+        0: STEERCOMFAULT_STEERCOMNOFAULT
+        1: STEERCOMFAULT_STEERCOMFAULT
+      is_signed_var: false
+      len: 8
+      name: SteerComFault
+      offset: 0.0
+      order: intel
+      physical_range: '[0|255]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 8
+      enum:
+        0: STEERHARDFAULT_STEERSYSTEMHWNOFAULT
+        1: STEERHARDFAULT_STEERSYSTEMHWFAULT
+      is_signed_var: false
+      len: 8
+      name: SteerHardFault
+      offset: 0.0
+      order: intel
+      physical_range: '[0|255]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+    - bit: 0
+      enum:
+        0: STEERENSTATE_STEERENSTATEMANUAL
+        1: STEERENSTATE_STEERENSTATEAUTO
+        2: STEERENSTATE_STEERENSTATETAKEOVER
+        3: STEERENSTATE_STEERENSTATESTANDBY
+      is_signed_var: true
+      len: 2
+      name: SteerEnState
+      offset: 0.0
+      order: intel
+      physical_range: '[0|3]'
+      physical_unit: ''
+      precision: 1.0
+      type: enum
+  '503':
+    id: '503'
+    name: gearreport503_503
+    protocol_type: report
+    sender: VCU
+    vars:
+    - bit: 0
+      is_signed_var: false
+      len: 3
+      name: Gear_StateAct
+      offset: 0.0
+      order: intel
+      physical_range: '[0|3]'
+      physical_unit: ''
+      precision: 1.0
+      type: int

@@ -1,0 +1,140 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ACU VCU
+VAL_TABLE_ GEAR_Act 2 "GEAR_ACTUAL_REVERSE" 1 "GEAR_ACTUAL_DRIVE" 0 "GEAR_ACTUAL_PARK" ;
+VAL_TABLE_ GEAR_TARGET 2 "GEAR_TARGET_REVERSE" 1 "GEAR_TARGET_DRIVE" 0 "GEAR_TARGET_PARK" ;
+VAL_TABLE_ GEAR_EN_CTRL 1 "GEAR_EN_CTRL_ENABLE" 0 "GEAR_EN_CTRL_DISABLE" ;
+VAL_TABLE_ BRAKE_COM_FAULT 1 "BRAKE_COM_FAULT" 0 "BRAKE_COM_NO_FAULT" ;
+VAL_TABLE_ BRAKE_HW_FAULT 1 "BRAKE_SYSTEM_HW_FAULT" 0 "BRAKE_SYSTEM_HW_NO_FAULT" ;
+VAL_TABLE_ AEB_EN_CTRL 1 "AEB_EN_CTRL_ENABLE" 0 "AEB_EN_CTRL_DISABLE" ;
+VAL_TABLE_ BRAKE_EN_CTRL 1 "BRAKE_EN_CTRL_ENABLE" 0 "BRAKE_EN_CTRL_DISABLE" ;
+VAL_TABLE_ THROTTLE_EN_CTRL 1 "DRIVE_EN_CTRL_ENABLE" 0 "DRIVE_EN_CTRL_DISABLE" ;
+VAL_TABLE_ THROTTLE_EN_STATE 3 "THROTTLE_EN_STATE_STANDBY" 2 "THROTTLE_EN_STATE_TAKEOVER" 1 "THROTTLE_EN_STATE_AUTO" 0 "THROTTLE_EN_STATE_MANUAL" ;
+VAL_TABLE_ THROTTLE_HW_FAULT 1 "DRIVE_SYSTEM_HW_FAULT" 0 "DRIVE_SYSTEM_HW_NO_FAULT" ;
+VAL_TABLE_ THROTTLE_COM_FAULT 1 "THROTTLE_COM_FAULT" 0 "THROTTLE_COM_NO_FAULT" ;
+VAL_TABLE_ STEER_EN_CTRL 1 "STEER_EN_CTRL_ENABLE" 0 "STEER_EN_CTRL_DISABLE" ;
+VAL_TABLE_ STEER_COM_FAULT 1 "STEER_COM_FAULT" 0 "STEER_COM_NO_FAULT" ;
+VAL_TABLE_ STEER_HW_FAULT 1 "STEER_SYSTEM_HW_FAULT" 0 "STEER_SYSTEM_HW_NO_FAULT" ;
+VAL_TABLE_ STEER_EN_STATE 3 "STEER_EN_STATE_STANDBY" 2 "STEER_EN_STATE_TAKEOVER" 1 "STEER_EN_STATE_AUTO" 0 "STEER_EN_STATE_MANUAL" ;
+
+
+BO_ 1283 GearReport503: 1 VCU
+ SG_ Gear_StateAct : 0|3@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 259 GearCommand103: 1 ACU
+ SG_ GearTarget : 1|3@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ GearEnCtrl : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1281 BrakeReport501: 6 VCU
+ SG_ BrakePedalAct : 24|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ BrakeHWFault : 16|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BrakeComFault : 8|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BrakeEnState : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 257 BrakeCommand101: 6 ACU
+ SG_ BrakePedalTarget : 24|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ BrakeEnCtrl : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Brake_Dec : 8|10@1+ (0.01,0) [0|10.23] "m/s^2" Vector__XXX
+ SG_ AEBEnCtrl : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1280 ThrottleReport500: 6 VCU
+ SG_ ThrottlePedalAct : 24|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ DriveComFault : 16|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DriveHWFault : 8|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ThrottleEnState : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 256 ThrottleCommand100: 6 ACU
+ SG_ TrottlePedalTarget : 32|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ Throttle_Acc : 8|10@1+ (0.01,0) [0|10.23] "m/s^2" Vector__XXX
+ SG_ ThrottleEnCtrl : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 258 SteeringCommand102: 4 ACU
+ SG_ HandWheelSteerAngTgt : 16|16@1- (1,0) [-500|500] "deg" Vector__XXX
+ SG_ HandWheelSteerAngSpd : 8|8@1+ (1,0) [0|255] "deg/s" Vector__XXX
+ SG_ SteerEnCtrl : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1282 SteeringReport502: 6 VCU
+ SG_ HandWheelSteerAngSpdAct : 40|8@1+ (1,0) [0|255] "deg/s" Vector__XXX
+ SG_ HandWheelSteerAngAct : 24|16@1- (1,0) [-512|511] "deg" Vector__XXX
+ SG_ SteerComFault : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ SteerHardFault : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ SteerEnState : 0|2@1- (1,0) [0|3] "" Vector__XXX
+
+
+
+CM_ SG_ 1282 HandWheelSteerAngSpdAct "greater than 0 accel less than 0 deaccel";
+CM_ SG_ 1282 HandWheelSteerAngAct "greater than 0 left less than 0 left";
+BA_DEF_ BO_  "NmMessage" ENUM  "No";
+BA_DEF_ SG_  "GenSigStartValue" INT 0 0;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic";
+BA_DEF_ SG_  "GenSigInactiveVAlue" INT 0 0;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "cycle";
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 0;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 0;
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 0;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 0;
+BA_DEF_ BO_  "DiagState" ENUM  "No";
+BA_DEF_ BO_  "Diagresponse" ENUM  "No";
+BA_DEF_ BO_  "DiagRequest" ENUM  "No";
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "NmMessage" "No";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "GenSigInactiveVAlue" 0;
+BA_DEF_DEF_  "GenMsgSendType" "cycle";
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 0;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "Diagresponse" "No";
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "BusType" "CAN";
+VAL_ 259 GearTarget 2 "GEAR_TARGET_REVERSE" 1 "GEAR_TARGET_DRIVE" 0 "GEAR_TARGET_PARK" ;
+VAL_ 259 GearEnCtrl 1 "GEAR_EN_CTRL_ENABLE" 0 "GEAR_EN_CTRL_DISABLE" ;
+VAL_ 1281 BrakeHWFault 1 "BRAKE_SYSTEM_HW_FAULT" 0 "BRAKE_SYSTEM_HW_NO_FAULT" ;
+VAL_ 1281 BrakeComFault 1 "BRAKE_COM_FAULT" 0 "BRAKE_COM_NO_FAULT" ;
+VAL_ 257 BrakeEnCtrl 1 "BRAKE_EN_CTRL_ENABLE" 0 "BRAKE_EN_CTRL_DISABLE" ;
+VAL_ 257 AEBEnCtrl 1 "AEB_EN_CTRL_ENABLE" 0 "AEB_EN_CTRL_DISABLE" ;
+VAL_ 1280 DriveComFault 1 "THROTTLE_COM_FAULT" 0 "THROTTLE_COM_NO_FAULT" ;
+VAL_ 1280 DriveHWFault 1 "DRIVE_SYSTEM_HW_FAULT" 0 "DRIVE_SYSTEM_HW_NO_FAULT" ;
+VAL_ 1280 ThrottleEnState 3 "THROTTLE_EN_STATE_STANDBY" 2 "THROTTLE_EN_STATE_TAKEOVER" 1 "THROTTLE_EN_STATE_AUTO" 0 "THROTTLE_EN_STATE_MANUAL" ;
+VAL_ 256 ThrottleEnCtrl 1 "DRIVE_EN_CTRL_ENABLE" 0 "DRIVE_EN_CTRL_DISABLE" ;
+VAL_ 258 SteerEnCtrl 1 "SteerEnCtrlEnable" 0 "SteerEnCtrlDisable" ;
+VAL_ 1282 SteerComFault 1 "SteerComFault" 0 "SteerComNoFault" ;
+VAL_ 1282 SteerHardFault 1 "SteerSystemHwFault" 0 "SteerSystemHwNoFault" ;
+VAL_ 1282 SteerEnState 3 "SteerEnStateStandby" 2 "SteerEnStateTakeover" 1 "SteerEnStateAuto" 0 "SteerEnStateManual" ;
+
