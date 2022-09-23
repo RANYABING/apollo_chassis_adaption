@@ -1,0 +1,192 @@
+syntax = "proto2";
+
+package apollo.canbus;
+
+message Throttlecommand100_100 {
+// Control Message
+  enum ThrottleenctrlType {
+    THROTTLEENCTRL_DRIVE_EN_CTRL_DISABLE = 0;
+    THROTTLEENCTRL_DRIVE_EN_CTRL_ENABLE = 1;
+  }
+  // [%] [0|100]
+  optional double trottlepedaltarget = 1;
+  // [m/s^2] [0|10.23]
+  optional double throttle_acc = 2;
+  // [] [0|1]
+  optional ThrottleenctrlType throttleenctrl = 3;
+}
+
+message Brakecommand101_101 {
+// Control Message
+  enum BrakeenctrlType {
+    BRAKEENCTRL_BRAKE_EN_CTRL_DISABLE = 0;
+    BRAKEENCTRL_BRAKE_EN_CTRL_ENABLE = 1;
+  }
+  enum AebenctrlType {
+    AEBENCTRL_AEB_EN_CTRL_DISABLE = 0;
+    AEBENCTRL_AEB_EN_CTRL_ENABLE = 1;
+  }
+  // [%] [0|100]
+  optional double brakepedaltarget = 1;
+  // [] [0|1]
+  optional BrakeenctrlType brakeenctrl = 2;
+  // [m/s^2] [0|10.23]
+  optional double brake_dec = 3;
+  // [] [0|1]
+  optional AebenctrlType aebenctrl = 4;
+}
+
+message Steeringcommand102_102 {
+// Control Message
+  enum SteerenctrlType {
+    STEERENCTRL_STEERENCTRLDISABLE = 0;
+    STEERENCTRL_STEERENCTRLENABLE = 1;
+  }
+  // [deg] [-500|500]
+  optional int32 handwheelsteerangtgt = 1;
+  // [deg/s] [0|255]
+  optional int32 handwheelsteerangspd = 2;
+  // [] [0|1]
+  optional SteerenctrlType steerenctrl = 3;
+}
+
+message Gearcommand103_103 {
+// Control Message
+  enum GeartargetType {
+    GEARTARGET_GEAR_TARGET_PARK = 0;
+    GEARTARGET_GEAR_TARGET_DRIVE = 1;
+    GEARTARGET_GEAR_TARGET_REVERSE = 2;
+  }
+  enum GearenctrlType {
+    GEARENCTRL_GEAR_EN_CTRL_DISABLE = 0;
+    GEARENCTRL_GEAR_EN_CTRL_ENABLE = 1;
+  }
+  // [] [0|3]
+  optional GeartargetType geartarget = 1;
+  // [] [0|1]
+  optional GearenctrlType gearenctrl = 2;
+}
+
+message Throttlereport500_500 {
+// Report Message
+  enum DrivecomfaultType {
+    DRIVECOMFAULT_THROTTLE_COM_NO_FAULT = 0;
+    DRIVECOMFAULT_THROTTLE_COM_FAULT = 1;
+  }
+  enum DrivehwfaultType {
+    DRIVEHWFAULT_DRIVE_SYSTEM_HW_NO_FAULT = 0;
+    DRIVEHWFAULT_DRIVE_SYSTEM_HW_FAULT = 1;
+  }
+  enum ThrottleenstateType {
+    THROTTLEENSTATE_THROTTLE_EN_STATE_MANUAL = 0;
+    THROTTLEENSTATE_THROTTLE_EN_STATE_AUTO = 1;
+    THROTTLEENSTATE_THROTTLE_EN_STATE_TAKEOVER = 2;
+    THROTTLEENSTATE_THROTTLE_EN_STATE_STANDBY = 3;
+  }
+  // [%] [0|100]
+  optional double throttlepedalact = 1;
+  // [] [0|1]
+  optional DrivecomfaultType drivecomfault = 2;
+  // [] [0|1]
+  optional DrivehwfaultType drivehwfault = 3;
+  // [] [0|3]
+  optional ThrottleenstateType throttleenstate = 4;
+}
+
+message Brakereport501_501 {
+// Report Message
+  enum BrakehwfaultType {
+    BRAKEHWFAULT_BRAKE_SYSTEM_HW_NO_FAULT = 0;
+    BRAKEHWFAULT_BRAKE_SYSTEM_HW_FAULT = 1;
+  }
+  enum BrakecomfaultType {
+    BRAKECOMFAULT_BRAKE_COM_NO_FAULT = 0;
+    BRAKECOMFAULT_BRAKE_COM_FAULT = 1;
+  }
+  // [%] [0|100]
+  optional double brakepedalact = 1;
+  // [] [0|1]
+  optional BrakehwfaultType brakehwfault = 2;
+  // [] [0|1]
+  optional BrakecomfaultType brakecomfault = 3;
+  // [] [0|3]
+  optional int32 brakeenstate = 4;
+}
+
+message Steeringreport502_502 {
+// Report Message
+  enum SteercomfaultType {
+    STEERCOMFAULT_STEERCOMNOFAULT = 0;
+    STEERCOMFAULT_STEERCOMFAULT = 1;
+  }
+  enum SteerhardfaultType {
+    STEERHARDFAULT_STEERSYSTEMHWNOFAULT = 0;
+    STEERHARDFAULT_STEERSYSTEMHWFAULT = 1;
+  }
+  enum SteerenstateType {
+    STEERENSTATE_STEERENSTATEMANUAL = 0;
+    STEERENSTATE_STEERENSTATEAUTO = 1;
+    STEERENSTATE_STEERENSTATETAKEOVER = 2;
+    STEERENSTATE_STEERENSTATESTANDBY = 3;
+  }
+  // greater than 0 accel less than 0 deaccel [deg/s] [0|255]
+  optional int32 handwheelsteerangspdact = 1;
+  // greater than 0 left less than 0 left [deg] [-512|511]
+  optional int32 handwheelsteerangact = 2;
+  // [] [0|255]
+  optional SteercomfaultType steercomfault = 3;
+  // [] [0|255]
+  optional SteerhardfaultType steerhardfault = 4;
+  // [] [0|3]
+  optional SteerenstateType steerenstate = 5;
+}
+
+message Gearreport503_503 {
+// Report Message
+  enum GearstatefaultType {
+    GEARSTATEFAULT_GEAR_NO_FAULT = 0;
+    GEARSTATEFAULT_GEAR_FAULT = 1;
+  }
+  enum Gear_stateactType {
+    GEAR_STATEACT_GEAR_ACTUAL_NEUTRAL = 0;
+    GEAR_STATEACT_GEAR_ACTUAL_DRIVE = 1;
+    GEAR_STATEACT_GEAR_ACTUAL_REVERSE = 2;
+  }
+  // [] [0|1]
+  optional GearstatefaultType gearstatefault = 1;
+  // [] [0|3]
+  optional Gear_stateactType gear_stateact = 2;
+}
+
+message Vcureport505_505 {
+// Report Message
+  // [m/s] [0|65.535]
+  optional double vehiclespeed = 1;
+  // [m/s^2] [-10|10]
+  optional double acc_x = 2;
+}
+
+message Wheelspeedreport506_506 {
+// Report Message
+  // WheelSpeedRR [m/s] [0|65.535]
+  optional double wheelspeedrr = 1;
+  // WheelSpeedRL [m/s] [0|65.535]
+  optional double wheelspeedrl = 2;
+  // WheelSpeedFR [m/s] [0|65.535]
+  optional double wheelspeedfr = 3;
+  // WheelSpeedFL [m/s] [0|65.535]
+  optional double wheelspeedfl = 4;
+}
+
+message Mjev {
+  optional Throttlecommand100_100 throttlecommand100_100 = 1; // control message
+  optional Brakecommand101_101 brakecommand101_101 = 2; // control message
+  optional Steeringcommand102_102 steeringcommand102_102 = 3; // control message
+  optional Gearcommand103_103 gearcommand103_103 = 4; // control message
+  optional Throttlereport500_500 throttlereport500_500 = 5; // report message
+  optional Brakereport501_501 brakereport501_501 = 6; // report message
+  optional Steeringreport502_502 steeringreport502_502 = 7; // report message
+  optional Gearreport503_503 gearreport503_503 = 8; // report message
+  optional Vcureport505_505 vcureport505_505 = 9; // report message
+  optional Wheelspeedreport506_506 wheelspeedreport506_506 = 10; // report message
+}
